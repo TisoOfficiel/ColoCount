@@ -11,8 +11,8 @@ use App\Model\Manager\ChargeManager;
 
 class ChargeController
 {
-    #[Route('/mes_colocs/{id}/add_charge', name: "mesColocs.addCharge", methods: ["POST"])]
-    public function addCharge($id){
+    #[Route('/mes_colocs/{id}/add_depense', name: "mesColocs.addDepense", methods: ["POST"])]
+    public function addDepense($id){
         // TOKEN Verif si connecter
         // Verif si la personne connecter est bien dans la bonne url => colocation
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -47,9 +47,9 @@ class ChargeController
                         $connection->updateAcount($id,$info_paymaster,$info_participants,$amountPerPerson);
                     }
                     echo json_encode([
-                        'status' => 'oui',
-                        
-                        'message' => 'oui'
+                        'status' => 'sucess',
+                        'message' => 'charge bien crée',
+            
                     ]);
                     exit;
                 }
@@ -59,9 +59,36 @@ class ChargeController
         echo json_encode([
             'status' => 'error',
             
-            'message' => 'Pas de connexion'
+            'message' => 'Pas de charge crée'
         ]);
 
         exit;
+    }
+
+    #[Route('/mes_colocs/{id}/add_remboursement',name:"mesColocas.addRemboursement",methods:['POST'])]
+    public function addRemboursement($id){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if(!empty($_POST)){
+                if(isset($_POST["paymaster"],$_POST["beneficiary"],$_POST['amount']) && !empty($_POST["paymaster"] && !empty($_POST["beneficiary"]) && !empty($_POST['amount']))) {
+                    
+                    $paymaster_array = json_decode($_POST['paymaster'], true);
+                    $beneficiary_array = json_decode($_POST['beneficiary'],true);
+
+                    foreach ($paymaster_array as $key => $value) {
+                        $info_paymaster[] = htmlspecialchars(strip_tags($value));
+                    }                    
+                    foreach ($beneficiary_array as $key => $value) {
+                        $info_beneficiary[] = htmlspecialchars(strip_tags($value));
+                    }                    
+
+                    $amount = htmlspecialchars(strip_tags($_POST['amount']));        
+                    
+                    $connection = new ChargeManager(new PDO());
+                    $connection->updateAcountRemboursement($id,$info_paymaster,$info_beneficiary,$amount);
+                    
+                    
+                }
+            }
+        }
     }
 }
