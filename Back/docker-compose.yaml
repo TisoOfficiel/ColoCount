@@ -1,0 +1,44 @@
+# Version du docker compose utilisé
+version: '3.1'
+
+services:
+  #Service php
+  php:
+    #Construire l'image php
+    build:
+      #Path relatif du fichier Dockerfile
+      context: .
+      #Nom du dockerfile ( Dockerfile )
+      dockerfile: Dockerfile
+    #Port du conteneur
+    ports:
+      - '1501:80'
+    volumes:
+      - ./app:/var/www/html
+
+  #Autre service
+  db:
+    #image utiliser mariadb
+    image: 'mariadb'
+    #Si erreur fatal redémarage
+    restart: always
+    #Les variables d'environnement
+    environment:
+      MYSQL_DATABASE: colo_count
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      # Pour lancer un dump automatiquement au montage du conteneur
+      - ./database/colo_count.sql:/docker-entrypoint-initdb.d/colo_count.sql
+
+  #Encore un autre service
+  phpmyadmin:
+    #image utiliser phpmyadmin
+    image: phpmyadmin
+    #Si erreur fatal redémarage
+    restart: always
+    #Port du conteneur
+    ports:
+      - '8080:80'
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql

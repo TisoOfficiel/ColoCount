@@ -1,0 +1,131 @@
+.modale-depense .modale-depense-container{
+    width: 70%;
+    max-width: 1400px;
+}
+
+.modale-depense h1{
+    margin-bottom: 5px;
+}
+
+.modale-depense .category-depense{
+    width: fit-content;
+    border-radius: 90px;
+    padding: 9px 20px;
+    background: #F7F7F7;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.modale-depense .depense-bloc{
+    display: flex;
+    gap: 5%;
+}
+
+.modale-depense .depense-total{
+    width: fit-content;
+    padding: 20px;
+    height: fit-content;
+}
+
+.modale-depense .depense-participants {
+    padding: 20px;
+    height: fit-content;
+    flex: 1;
+}
+.modale-depense .depense-participants .payeur-depense   {
+    margin-bottom: 20px;
+}
+
+
+.modale-depense .depense-participants .participants-list{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.modale-depense .depense-participants .participant-item{
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: auto;
+}
+
+
+
+
+.modale-depense .prix-divise{
+    position: relative;
+    padding: 0 3px;
+}
+.modale-depense .prix-divise::after{
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(258.49deg, #FF51EB 1.12%, #EDE342 94.62%);
+}
+
+
+
+@media screen and (max-width: 1024px){
+    .modale-depense .depense-container{
+        width: 90%;
+    }
+
+    .modale-depense .depense-bloc{
+        flex-direction: column;
+        gap: 30px;
+    }
+    .modale-depense .depense-participants{
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3%;
+    }
+    .modale-depense .depense-participants,
+    .modale-depense .box-model.depense-remboursement {
+        width: auto;
+    }
+
+}
+
+@media screen and (max-width: 728px){
+    .modale-depense .depense-cards {
+        margin-bottom: 30px;
+        flex-direction: column;
+        row-gap: 25px;
+    }
+
+    .modale-depense .depense-participants .participants-list{
+        grid-template-columns: repeat(1, 1fr);
+        gap: 15px;
+    }
+    .modale-depense .depense-participants .box-model {
+        padding: 15px 20px;
+        gap: 10px;
+    }
+
+    .modale-depense .box-model.depense-remboursement {
+        padding: 25px 20px;
+    }
+
+    .modale-depense .depense-remboursement .rembourse-item {
+        padding: 20px 10px;
+    }
+
+    .modale-depense .depense-remboursement .rembourse-item:last-child {
+        padding: 20px 10px 0;
+    }
+
+    .modale-depense .depense-remboursement .rembourse-text {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .modale-depense .depense-list .para-16 {
+        font-size: 13px;
+    }
+}
