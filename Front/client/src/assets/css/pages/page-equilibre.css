@@ -1,0 +1,166 @@
+.page-equilibre .equilibre-container{
+    width: 85%;
+    max-width: 1400px;
+    margin: 0 auto 60px;
+}
+
+.page-equilibre h1{
+    margin-bottom: 5px;
+}
+.page-equilibre .equilibre-container > h2{
+    margin-bottom: 40px;
+}
+
+.page-equilibre .equilibre-bloc{
+    display: flex;
+    gap: 5%;
+}
+
+
+.page-equilibre .equilibre-list{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.page-equilibre .equilibre-participants{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 7%;
+    row-gap: 30px;
+    width: 40%;
+    height: fit-content;
+}
+
+.page-equilibre .equilibre-participants .box-model{
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 15px;
+}
+.page-equilibre .equilibre-participants .box-model .photo-profil{
+    width: 60px;
+}
+
+
+
+.page-equilibre .box-model.equilibre-remboursement{
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: fit-content;
+}
+.page-equilibre .box-model.equilibre-remboursement h2{
+    margin-bottom: 5px;
+}
+
+.page-equilibre .equilibre-remboursement .equilibre-list{
+    display: flex;
+}
+.page-equilibre .equilibre-remboursement .rembourse-item{
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+    padding: 30px 40px;
+    border-bottom: 1px solid #E0E0E0;
+}
+.page-equilibre .equilibre-remboursement .rembourse-item:last-child{
+    padding: 30px 40px 0;
+    border-bottom: none;
+}
+
+.page-equilibre .equilibre-remboursement .rembourse-text{
+    display: flex;
+    width: 100%;
+}
+
+.page-equilibre .equilibre-list .para-18{
+    width: 40%;
+}
+.page-equilibre .equilibre-list .para-15{
+    width: 20%;
+    line-height: 1.3em;
+}
+
+
+.page-equilibre .equilibre-remboursement .rembourse-price{
+    width: 110px;
+    display: flex;
+    justify-content: flex-end;
+}
+.page-equilibre .equilibre-remboursement .rembourse-price p{
+    position: relative;
+    padding: 0 5px;
+}
+.page-equilibre .rembourse-price p::after{
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(258.49deg, #FF51EB 1.12%, #EDE342 94.62%);
+}
+
+
+
+@media screen and (max-width: 1024px){
+    .page-equilibre .equilibre-container{
+        width: 90%;
+    }
+
+    .page-equilibre .equilibre-bloc{
+        flex-direction: column;
+        gap: 50px;
+    }
+    .page-equilibre .equilibre-participants{
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3%;
+    }
+    .page-equilibre .equilibre-participants,
+    .page-equilibre .box-model.equilibre-remboursement {
+        width: auto;
+    }
+
+}
+
+@media screen and (max-width: 728px){
+    .page-equilibre .equilibre-cards {
+        margin-bottom: 30px;
+        flex-direction: column;
+        row-gap: 25px;
+    }
+
+    .page-equilibre .equilibre-participants{
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5%;
+    }
+    .page-equilibre .equilibre-participants .box-model {
+        padding: 20px;
+        gap: 10px;
+    }
+
+    .page-equilibre .box-model.equilibre-remboursement {
+        padding: 25px 20px;
+    }
+
+    .page-equilibre .equilibre-remboursement .rembourse-item {
+        padding: 20px 10px;
+    }
+
+    .page-equilibre .equilibre-remboursement .rembourse-item:last-child {
+        padding: 20px 10px 0;
+    }
+
+    .page-equilibre .equilibre-remboursement .rembourse-text {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .page-equilibre .equilibre-list .para-16 {
+        font-size: 13px;
+    }
+}
