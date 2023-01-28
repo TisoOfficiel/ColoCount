@@ -1,0 +1,11 @@
+{
+    "name": "romain/colo-count",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {
+        "firebase/php-jwt": "^6.3"
+    }
+}

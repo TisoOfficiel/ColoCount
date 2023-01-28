@@ -1,0 +1,132 @@
+.modale-participants .modale-participants-container{
+    width: 60%;
+    max-width: 1200px;
+}
+
+.modale-participants h1{
+    margin-bottom: 30px;
+}
+.modale-participants .nb-participants{
+    margin-bottom: 20px;
+}
+
+.modale-participants .participants-total{
+    width: 30%;
+    padding: 20px;
+    height: fit-content;
+}
+
+.icon-participant{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.icon-participant::before{
+    content: "";
+    display: flex;
+    width: 15px;
+    height: 15px;
+    background-image: url("../../images/icons/icon-participant.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.modale-participants .participants-list{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    height: fit-content;
+}
+.modale-participants .participants-list .participant-item{
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: auto;
+}
+.modale-participants .participants-list .participant-info{
+    display: flex;
+    gap: 13px;
+    align-items: center;
+}
+
+.modale-participants .participant-item .photo-profil{
+    width: 45px;
+}
+
+
+.modale-participants .icon-delete{
+    display: flex;
+    width: 15px;
+    height: 15px;
+}
+.modale-participants .icon-delete img{
+    width: 100%;
+}
+
+
+@media screen and (max-width: 1024px){
+    .modale-participants .participants-container{
+        width: 80%;
+    }
+
+    .modale-participants .participants-bloc{
+        flex-direction: column;
+        gap: 50px;
+    }
+    .modale-participants .participants-participants{
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3%;
+    }
+    .modale-participants .participants-participants,
+    .modale-participants .box-model.participants-remboursement {
+        width: auto;
+    }
+
+}
+
+@media screen and (max-width: 728px){
+    .modale-participants .participants-container{
+        width: 90%;
+    }
+    .modale-participants .participants-cards {
+        margin-bottom: 30px;
+        flex-direction: column;
+        row-gap: 25px;
+    }
+
+    .modale-participants .participants-list{
+        grid-template-columns: repeat(1, 1fr);
+        gap: 12px;
+    }
+
+    .modale-participants .participants-participants .box-model {
+        padding: 20px;
+        gap: 10px;
+    }
+
+    .modale-participants .box-model.participants-remboursement {
+        padding: 25px 20px;
+    }
+
+    .modale-participants .participants-remboursement .rembourse-item {
+        padding: 20px 10px;
+    }
+
+    .modale-participants .participants-remboursement .rembourse-item:last-child {
+        padding: 20px 10px 0;
+    }
+
+    .modale-participants .participants-remboursement .rembourse-text {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .modale-participants .participants-list .para-16 {
+        font-size: 13px;
+    }
+}
