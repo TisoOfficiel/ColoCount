@@ -256,18 +256,14 @@ class ColocationController
                     }
                 }
                 
-                if(count($chargeArray) > 1){
-                    foreach ( $chargeArray as $key => $value ) {
-                        $chargeArray[$i] = $value;
-                        unset($chargeArray[$key]);
-                        $i++;
-                    }
-                }else{
+              
+                
+                
                     foreach ( $chargeArray as $key => $value ) {
                         $chargeArray[$i] = $value;
                         $i++;
                     }
-                }
+                
                 
                 for ($i=0; $i < count($chargeArray); $i++) { 
                     $chargeAll [] = [$chargeArray[$i],$paymasterArray[$i],$ParticipantPersCharge[$i]];
@@ -397,12 +393,7 @@ class ColocationController
 
                 $finish = false;
                 $i = 0;
-                // $user_min_key = -1;
-                // $user_max_key = -1;
-                // echo "<pre>";
-                // var_dump($userAll);
-                // echo "</pre>";
-                // die;
+
                 while(!$finish){
                     // $i++;
                     // if($i > 0){                    

@@ -53,8 +53,7 @@ class ChargeManager extends BaseManager
     }
 
     public function updateAcount($id,$paymaster,$participants,$amountperPerson){
-        
-
+       
         $sql = "UPDATE colocation_user SET `amount` = (SELECT `amount` FROM colocation_user WHERE user_id = :user_id AND colocation_id = :colocation_id) + :amount
         WHERE colocation_id = :colocation_id and user_id = :user_id ;";
         // $sql = "UPDATE colocation_user set `amount` = :amount where `user_id` = :user_id and `colocation_id` = :colocation_id";
@@ -65,8 +64,7 @@ class ChargeManager extends BaseManager
         $query->bindValue(':colocation_id', $id,\PDO::PARAM_STR);
 
         $query->execute();
-        
-
+    
         $query = $this->pdo->prepare($sql);
         
         foreach ($participants as $key => $participant) {
@@ -75,6 +73,28 @@ class ChargeManager extends BaseManager
             $query->bindValue(":colocation_id", $id);
             $query->execute();
         }
+
+    }
+    public function updateAcountRemboursement($id,$paymaster,$beneficiary,$amount){
+       
+        $sql = "UPDATE colocation_user SET `amount` = (SELECT `amount` FROM colocation_user WHERE user_id = :user_id AND colocation_id = :colocation_id) + :amount
+        WHERE colocation_id = :colocation_id and user_id = :user_id ;";
+        
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue(':amount', $amount,\PDO::PARAM_STR);
+        $query->bindValue(':user_id', $paymaster[1],\PDO::PARAM_STR);
+        $query->bindValue(':colocation_id', $id,\PDO::PARAM_STR);
+
+        $query->execute();
+        
+        $query = $this->pdo->prepare($sql);
+        
+        
+        $query->bindValue(":amount", -$amount);
+        $query->bindValue(":user_id", $beneficiary[1]);
+        $query->bindValue(":colocation_id", $id);
+        
+        $query->execute();
 
     }
 }
