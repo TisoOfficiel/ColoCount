@@ -66,7 +66,33 @@ class UserManager extends BaseManager
         return new User($response);
     }
 
+    public function getUserByEmail($email):?User
+    {
 
+        $sql = "SELECT * FROM `users` where `email` =:email";
+
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue(':email', $email, \PDO::PARAM_STR);
+        
+        $query->execute();
+
+        $response = $query->fetch();
+
+        if(!$response){
+            return null;
+        }
+
+        return new User($response);
+    }
+
+    public function addInvitation($colocation_id,$user_id){
+        $sql = "INSERT INTO `invitation_coloc`(colocation_id,user_id) VALUES (:colocation_id,:user_id)";
+
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue(':colocation_id', $colocation_id, \PDO::PARAM_STR);
+        $query->bindValue(':user_id', $user_id, \PDO::PARAM_STR);
+        $query->execute();
+    }
     public function getAllColocUser($idColoc):?array
     {
 

@@ -5,8 +5,9 @@ namespace App\Controller;
 use App\Base\CookieHelper;
 use App\Model\Factory\PDO;
 use App\Model\Route\Route;
-use App\Model\Manager\UserManager;
 use App\Service\JWTHelper;
+use App\Model\Manager\UserManager;
+use App\Model\Manager\ColocationManager;
 
 class UserController
 {   
@@ -160,7 +161,6 @@ class UserController
 
     #[ROUTE('/mes_colocs/edit/mon_compte',name:"mes_colocs/mon_compte.editUser",methods:["POST"])]
     public function editUser(){
-        {
             $cred = str_replace("Bearer ", "", getallheaders()['Authorization'] ?? getallheaders()['authorization'] ?? "");
             $token = JWTHelper::decodeJWT($cred);
             if($token){
@@ -309,10 +309,7 @@ class UserController
                         ]);
                         exit;
                     }
-                }
-    
-            }
-    
+                }    
             echo json_encode([
                 'status' => 'error',
                 'message' => 'Pas de d\'inscription'
@@ -320,4 +317,77 @@ class UserController
             exit;
     }
 
+    #[ROUTE('/mes_colocs/{id}/invite_user',name:'mes_colocs.inviteUser',methods:["POST"])]
+    public function inviteUser($id){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if (!empty($_POST)) {
+
+                if (isset($_POST["email"]) && !empty($_POST['email'])) {
+                    $user_email = htmlspecialchars(strip_tags($_POST['email']));
+                    $colocation_id = htmlspecialchars(strip_tags($id));
+        
+                    $connectionPdo = new UserManager(new PDO());
+                    
+                    $user = $connectionPdo->getUserByEmail($user_email);
+                    if($user){
+                        $connectionPdo->addInvitation($colocation_id,$user->getUser_Id());
+                    }
+                    echo json_encode([
+                        'status' => 'success',
+                        'message' => 'Invitation bien envoyé',
+                    ]);
+                    exit;
+                }
+            
+            }
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Pas d\'insvitation envoyé',
+            ]);
+            exit;
+        }
+
+    }
+    #[ROUTE('/mes_colocs/invitation_statuts/{id}',name:'mes_colocs.inviteUser',methods:["POST"])]
+    public function invitationStatus($id){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if (!empty($_POST)) {
+
+                if (isset($_POST["invitation"]) && !empty($_POST['invitation']) && ($_POST['invitation'] == "accepte" || $_POST['invitation'] == "refuse")) {
+                    $invitation = htmlspecialchars(strip_tags($_POST['invitation']));
+
+                    $connectionPdo = new ColocationManager(new PDO());
+                    
+                    $resultat = $connectionPdo->getInvitationById($id);
+                    $connectionPdo->updateInvitation($id);
+                    
+                    if($invitation == "accepte"){
+                        $colocation_id = $resultat["colocation_id"];
+                        $user_id = $resultat["user_id"];
+                        $connectionPdo->joinColoc($colocation_id,$user_id);
+
+                        echo json_encode([
+                            'status' => 'success',
+                            'message' => 'Invitation accepté',
+                        ]);
+                        exit;
+                    }else{
+                        echo json_encode([
+                            'status' => 'success',
+                            'message' => 'Invitation refusé',
+                        ]);
+    
+                        exit;
+                    }
+                    
+                }
+            }
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Pas d\'insvitation reçut',
+            ]);
+            exit;
+        }
+
+    }
 }

@@ -56,8 +56,6 @@ CREATE TABLE IF NOT EXISTS `colocation_user` (
 
 
 /* Insertion d'un colocation_user du compte Admin dans la table `colocation_user` */
-
-
 -- ADMIN
 INSERT INTO `colocation_user` (`user_id`,`colocation_id`, `amount`, `role`) VALUES
     (1,1,50,'admin');
@@ -124,6 +122,17 @@ INSERT INTO `charge_user` (`user_id`,`charge_username`,`charge_id`,`colocation_i
 INSERT INTO `charge_user` (`user_id`,`charge_username`,`charge_id`,`colocation_id`,`role_charge`) VALUES
     (2,'Romain',1,1,'participant');
 
+
+DROP TABLE IF EXISTS `invitation_coloc`;
+CREATE TABLE IF NOT EXISTS `invitation_coloc` (
+    `id` integer(11) NOT NULL AUTO_INCREMENT,
+    `user_id` integer(11) NOT NULL,
+    `colocation_id` integer(11) NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY(`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+    FOREIGN KEY(`colocation_id`) REFERENCES `colocation`(`colocation_id`) ON DELETE CASCADE
+);
+
 -- INSERT INTO `charge_user` (`user_id`,`charge_username`,`charge_id`,`colocation_id`,`role_charge`) VALUES
 --     (1,'Admin',2,1,'paymaster_participant');
 -- INSERT INTO `charge_user` (`user_id`,`charge_username`,`charge_id`,`colocation_id`,`role_charge`) VALUES
@@ -146,8 +155,6 @@ INSERT INTO `charge_user` (`user_id`,`charge_username`,`charge_id`,`colocation_i
 --     (3,'Herby',5,1,'paymaster');
 -- INSERT INTO `charge_user` (`user_id`,`charge_username`,`charge_id`,`colocation_id`,`role_charge`) VALUES
 --     (4,'Tete',5,1,'participant');
-
-
 
 
 
