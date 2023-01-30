@@ -8,7 +8,6 @@ use App\Model\Entity\Charge_user;
 use App\Model\Entity\Colocation;
 use App\Model\Entity\Colocation_user;
 use App\Model\Entity\User;
-use JetBrains\PhpStorm\ArrayShape;
 
 class ColocationManager extends BaseManager
 {
@@ -33,6 +32,41 @@ class ColocationManager extends BaseManager
         
     }
 
+    public function getInvitationById($id):array{
+        
+        $sql = "SELECT colocation_id,user_id from invitation_coloc where id = :id" ;
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue(':id', $id, \PDO::PARAM_STR);
+        $query->execute();
+
+        $response = $query->fetch();
+
+        return $response;
+    }
+
+    public function updateInvitation($id):void{
+        
+        $sql = "DELETE FROM `invitation_coloc` WHERE `id` = :id";
+
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue(':id', $id, \PDO::PARAM_STR);
+
+        $query->execute();
+
+    }
+
+    public function joinColoc($colocation_id,$user_id):void{
+
+        $sql = "INSERT INTO `colocation_user`(`colocation_id`,`user_id`,`amount`) VALUES (:colocation_id,:user_id,:amount)";
+
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue(':colocation_id', $colocation_id, \PDO::PARAM_STR);
+        $query->bindValue(':user_id', $user_id, \PDO::PARAM_STR);
+        $query->bindValue(':amount', 0, \PDO::PARAM_STR);
+
+        $query->execute();
+
+    }
 
     public function addColoc($name,$description,$created_at,$updated_at,$user_id):void
     {
