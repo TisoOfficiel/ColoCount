@@ -111,13 +111,14 @@ class ColocationController
         $cred = str_replace("Bearer ", "", getallheaders()['Authorization'] ?? getallheaders()['authorization'] ?? "");
         $token = JWTHelper::decodeJWT($cred);
 
-        if($token){
+        // if($token){
             
             if($_SERVER['REQUEST_METHOD'] == 'GET') {
                 
                 $connexionColocation = new ColocationManager(new PDO());
                 
                 $infoColoc = $connexionColocation->getOneColocs($id);
+               
                 $userAll =[];
                 $Transaction = [];
                 $charge_id = 0;
@@ -161,7 +162,13 @@ class ColocationController
                     exit;
                 }
 
+              
                 for ($j = 0; $j < count($infoColoc); $j++) {
+                    
+                    if($infoColoc[$j][4] == ""){
+                        continue;
+                    }
+
                     if ($infoColoc[$j][4]->getRole_Charge() == 'paymaster' || $infoColoc[$j][4]->getRole_Charge() == 'paymaster_participant'){
                         $paymaster_id = $infoColoc[$j][4]->getUser_Id();
                         $paymaster_name = $infoColoc[$j][4]->getCharge_username();
@@ -169,7 +176,6 @@ class ColocationController
                     }
     
                     if($infoColoc[$j][4]->getRole_Charge() == 'participant'){
-                       
                         $charge_id = $infoColoc[$j][4]->getCharge_Id();
                         $participant_id = $infoColoc[$j][4]->getUser_Id();
                         $participant_name = $infoColoc[$j][4]->getCharge_username();
@@ -193,17 +199,14 @@ class ColocationController
                             $participant[] = [$charge_id,$participant_id,$participant_name];
                             // $old_charge_id = $charge_id;
                     }
-                    
-                    if($infoColoc[$j][3]==""){
-                        continue;
-                    }else{
+
                         $charge_id = $infoColoc[$j][3]->getCharge_Id();
                         $charge_name = $infoColoc[$j][3]->getName();
                         $charge_amount = $infoColoc[$j][3]->getCharge_Amount();
                         $charge_type = $infoColoc[$j][3]->getType();
                         $charge_category = $infoColoc[$j][3]->getCategory();
                         $chargeArray[]=[ "charge_id"=>$charge_id, "charge_name"=>$charge_name,"charge_amount"=>$charge_amount,"charge_type"=>$charge_type,"charge_cartegory"=>$charge_category];
-                    }
+                    
                 }
                 
                 for ($i=0; $i < count($participant); $i++) { 
@@ -240,7 +243,7 @@ class ColocationController
                     }
                 }
 
-                $i = 0;
+                
                 
                 $keys = array ();
                 
@@ -256,22 +259,26 @@ class ColocationController
                     }
                 }
                 
-              
+                $i = 0;
+                foreach ( $chargeArray as $key => $value ) {
+                    $chargeArray[$i] = $value;
+                    unset($chargeArray[$key]);
+         
+                    $i++;
+                }
                 
-                
-                    foreach ( $chargeArray as $key => $value ) {
-                        $chargeArray[$i] = $value;
-                        $i++;
-                    }
                 
                 
                 for ($i=0; $i < count($chargeArray); $i++) { 
                     $chargeAll [] = [$chargeArray[$i],$paymasterArray[$i],$ParticipantPersCharge[$i]];
                 }
                 
- 
+                
+                // echo "<pre>";
+                // var_dump($infoColoc);
                 for ($i = 0; $i < count($infoColoc); $i++) {
-                    
+                        
+                        
                         $userInfo = [
                             'user_id'=>$infoColoc[$i][1]->getUser_Id(),
                             'user_username'=>$infoColoc[$i][1]->getUsername(),
@@ -339,7 +346,8 @@ class ColocationController
                         // }
     
                 };
-
+                // echo "</pre>";
+                // die;
                 
                 // echo "<pre>";
                 // var_dump($infoColoc);
@@ -553,12 +561,12 @@ class ColocationController
                 // echo "</pre>";
     
             }
-        }else{
-            json_encode([
-                "status"=>"error",
-                "message"=>"une erreur est survenue"
-            ]);
-        }
+        // }else{
+        //     json_encode([
+        //         "status"=>"error",
+        //         "message"=>"une erreur est survenue"
+        //     ]);
+        // }
     }
 
 }
