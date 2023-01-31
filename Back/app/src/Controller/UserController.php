@@ -359,13 +359,21 @@ class UserController
                     $connectionPdo = new ColocationManager(new PDO());
                     
                     $resultat = $connectionPdo->getInvitationById($id);
+                  
+                    if($resultat[0] == false){
+                        echo json_encode([
+                            'status' => 'error',
+                            'message' => 'Pas d\'insvitation reçut',
+                        ]);
+                        exit;
+                    }
+                    $colocation_id = $resultat[0]["colocation_id"];
+                    $user_id = $resultat[0]["user_id"];
                     $connectionPdo->updateInvitation($id);
-                    
-                    if($invitation == "accepte"){
-                        $colocation_id = $resultat["colocation_id"];
-                        $user_id = $resultat["user_id"];
-                        $connectionPdo->joinColoc($colocation_id,$user_id);
 
+                    if($invitation == "accepte"){
+
+                        $connectionPdo->joinColoc($colocation_id,$user_id);
                         echo json_encode([
                             'status' => 'success',
                             'message' => 'Invitation accepté',

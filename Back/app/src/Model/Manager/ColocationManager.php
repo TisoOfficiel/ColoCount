@@ -38,8 +38,8 @@ class ColocationManager extends BaseManager
         $query = $this->pdo->prepare($sql);
         $query->bindValue(':id', $id, \PDO::PARAM_STR);
         $query->execute();
-
-        $response = $query->fetch();
+        
+        $response [] = $query->fetch(\PDO::FETCH_ASSOC);
 
         return $response;
     }
@@ -130,10 +130,11 @@ class ColocationManager extends BaseManager
         //     }
         // }
         // die;
-        $sql = "SELECT c.colocation_id,c.colocation_name,c.description,u.username,u.user_id ,u.username ,ch.charge_id ,ch.name,ch.charge_amount,ch.type,ch.category ,chu.charge_username,chu.role_charge,cu.amount,cu.role FROM colocation AS c LEFT JOIN colocation_user AS cu ON c.colocation_id = cu.colocation_id LEFT JOIN users AS u ON cu.user_id = u.user_id LEFT JOIN charge_user AS chu ON u.user_id = chu.user_id LEFT JOIN charge AS ch ON ch.charge_id = chu.charge_id where cu.colocation_id=1 and c.colocation_id =:id";
+        $sql = "SELECT c.colocation_id,c.colocation_name,c.description,u.username,u.user_id ,u.username ,ch.charge_id ,ch.name,ch.charge_amount,ch.type,ch.category ,chu.charge_username,chu.role_charge,cu.amount,cu.role FROM colocation AS c LEFT JOIN colocation_user AS cu ON c.colocation_id = cu.colocation_id LEFT JOIN users AS u ON cu.user_id = u.user_id LEFT JOIN charge_user AS chu ON u.user_id = chu.user_id LEFT JOIN charge AS ch ON ch.charge_id = chu.charge_id where cu.colocation_id=:colocation_user_colocation_id and c.colocation_id =:colacation_id";
 
         $query = $this->pdo->prepare($sql);
-        $query->bindValue(':id', $id,\PDO::PARAM_STR);
+        $query->bindValue(':colocation_user_colocation_id', $id,\PDO::PARAM_STR);
+        $query->bindValue(':colacation_id', $id,\PDO::PARAM_STR);
 
         $query->execute();
        
@@ -150,48 +151,64 @@ class ColocationManager extends BaseManager
         
         
         while ($data = $query->fetch(\PDO::FETCH_ASSOC)) {
+            
+            // echo "<pre>";
+            // var_dump($data);
+            // echo "</pre>";
+
+            if($data["charge_id"] == NULL){
+                $infoColoc [] = [new Colocation($data),new User($data),new Colocation_user($data),"",""];
+            }else{
+
+                $infoColoc [] = [new Colocation($data),new User($data),new Colocation_user($data),new Charge($data),new Charge_user($data)];
+            }
+            
             // DE BASE
-            if($id_coloc != $data['colocation_id'] && $id_charge!=['charge_id']){
-                // echo"tout différent";
-                // echo "<br>";
-                // echo "ID COLOC INCREMENT: ". $id_coloc . " || ID COLOC BDD :" .$data['colocation_id'];
-                // echo "<br>";
-                // echo "ID CHARGE INCREMENT: ". $id_coloc . " || ID CHARGE BDD :" .$data['charge_id'];
-                $infoColoc[] = [new Colocation($data),new User($data),new Colocation_user($data),new Charge($data),new Charge_user($data)];
+            // if($id_coloc != $data['colocation_id'] && $id_charge!=['charge_id']){
+            //     // echo"tout différent";
+            //     // echo "<br>";
+            //     // echo "ID COLOC INCREMENT: ". $id_coloc . " || ID COLOC BDD :" .$data['colocation_id'];
+            //     // echo "<br>";
+            //     // echo "ID CHARGE INCREMENT: ". $id_coloc . " || ID CHARGE BDD :" .$data['charge_id'];
+            //     $infoColoc[] = [new Colocation($data),new User($data),new Colocation_user($data),new Charge($data),new Charge_user($data)];
                
-            }elseif($id_coloc != $data['colocation_id'] && $id_charge == $data['charge_id']){
-                // echo"ID CHARGE similaire a l'ancienne valeur";
-                // echo " ". ;
-                // echo " ".$id_charge;
+            // }elseif($id_coloc != $data['colocation_id'] && $id_charge == $data['charge_id']){
+            //     // echo"ID CHARGE similaire a l'ancienne valeur";
+            //     // echo " ". ;
+            //     // echo " ".$id_charge;
                
-                $infoColoc[] = [new Colocation($data),new User($data),new Colocation_user($data),"",new Charge_user($data)];
+            //     $infoColoc[] = [new Colocation($data),new User($data),new Colocation_user($data),"",new Charge_user($data)];
                 
-            }elseif($id_coloc == $data['colocation_id'] && $id_charge != $data['charge_id'] && $data['charge_id']!=NULL){
+            // }elseif($id_coloc == $data['colocation_id'] && $id_charge != $data['charge_id'] && $data['charge_id']!=NULL){
                 
-                // echo"ID COLOC ÉGALE MAIS PAS CHARGE";
-                // echo "<br>";
-                // echo "ID COLOC INCREMENT: ". $id_coloc . " || ID COLOC BDD :" .$data['colocation_id'];
-                // echo "<br>";
-                // echo "ID CHARGE INCREMENT: ". $id_coloc . " || ID CHARGE BDD :" .$data['charge_id'];
+            //     // echo"ID COLOC ÉGALE MAIS PAS CHARGE";
+            //     // echo "<br>";
+            //     // echo "ID COLOC INCREMENT: ". $id_coloc . " || ID COLOC BDD :" .$data['colocation_id'];
+            //     // echo "<br>";
+            //     // echo "ID CHARGE INCREMENT: ". $id_coloc . " || ID CHARGE BDD :" .$data['charge_id'];
 
 
-                $infoColoc[] = ["",new User($data),new Colocation_user($data),new Charge($data),new Charge_user($data)];
+            //     $infoColoc[] = ["",new User($data),new Colocation_user($data),new Charge($data),new Charge_user($data)];
   
-            }elseif($id_coloc == $data['colocation_id'] && $id_charge == $data['charge_id']&& $data['charge_id']!=NULL){
+            // }elseif($id_coloc == $data['colocation_id'] && $id_charge == $data['charge_id']&& $data['charge_id']!=NULL){
 
               
-                // echo"TOUT EGALE";
-                // echo "<br>";
-                // echo "ID COLOC INCREMENT: ". $id_coloc . " || ID COLOC BDD :" .$data['colocation_id'];
-                // echo "<br>";
-                // echo "ID CHARGE INCREMENT: ". $id_coloc . " || ID CHARGE BDD :" .$data['charge_id'];
-                $infoColoc[] = ["",new User($data),new Colocation_user($data),"",new Charge_user($data)];
+            //     // echo"TOUT EGALE";
+            //     // echo "<br>";
+            //     // echo "ID COLOC INCREMENT: ". $id_coloc . " || ID COLOC BDD :" .$data['colocation_id'];
+            //     // echo "<br>";
+            //     // echo "ID CHARGE INCREMENT: ". $id_coloc . " || ID CHARGE BDD :" .$data['charge_id'];
+            //     $infoColoc[] = ["",new User($data),new Colocation_user($data),"",new Charge_user($data)];
                 
-            }
-            $id_coloc = $data['colocation_id'];
-            $id_charge = $data['charge_id'];
-            
+            // }
+            // $id_coloc = $data['colocation_id'];
+            // $id_charge = $data['charge_id'];
         };
+        // echo "<pre>";
+        // var_dump($infoColoc);
+        // echo "</pre>";
+        // die;
+        // die;
         return $infoColoc;
     }
 
