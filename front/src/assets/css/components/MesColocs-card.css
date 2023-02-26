@@ -1,0 +1,43 @@
+.coloc-container{
+    width: 300px;
+    padding: 30px;
+    border: 0.5px solid #E0E0E0;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+}
+
+.coloc-container h2{
+    font-size: 30px;
+}
+
+.coloc-description{
+    font-size: 16px;
+    padding: 10px 0 30px 0;
+}
+
+.bottom{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+.bottom svg{
+    font-size: 16px;
+}
+.bottom span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    width: 36px;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.1);
+    border-radius: 36.5625px;
+    background: 
+    linear-gradient(white, white) padding-box,
+    linear-gradient(to left, #FF51EB, #EDE342) border-box;
+    border: 2px solid transparent;
+}
+.coloc-date{
+    color: #C8C8C8;
+    font-size: 15px;
+    font-weight: 700;
+}

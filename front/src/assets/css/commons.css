@@ -2,3 +2,16 @@
     margin: 0;
     padding: 0;
 }
+
+.btn{
+    padding: 11px 23px;
+    background: 
+    linear-gradient(white, white) padding-box,
+    linear-gradient(to left, #FF51EB, #EDE342) border-box;
+    border: 2px solid transparent;
+    color: #2F0029;
+    border-radius: 44px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
