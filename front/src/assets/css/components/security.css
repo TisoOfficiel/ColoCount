@@ -1,5 +1,5 @@
 .container-component{
-    background-image: url('../../image/Frame_117.svg');
+    background-image: url('../../image/backgroundSecurity.svg');
     height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
@@ -70,18 +70,6 @@ form{
     border-radius: 20px;
     border: 1px solid #E0E0E0;
     font-size: 20px;
-}
-button.submit{
-    padding: 11px 23px;
-    background: 
-    linear-gradient(white, white) padding-box,
-    linear-gradient(to left, #FF51EB, #EDE342) border-box;
-    border: 2px solid transparent;
-    color: #2F0029;
-    border-radius: 44px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
 }
 
 .link{

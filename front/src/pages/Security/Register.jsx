@@ -8,7 +8,7 @@ const Register = () => {
         button:"Je m'inscris",
         textLink:"Tu as déjà un compte ?",
         linkText: "Je me connecte",
-        link: "/login",
+        link: "/",
     };
     
   return (
