@@ -6,7 +6,7 @@ const Login = () => {
     formTitle: "Se connecter",
     register: false,
     button:"Je me connecte",
-    textLink:"Tu n'as pas encore de compte ?",
+    textLink:"Tu n'as pas encore de compte ? ",
     linkText: "Je m'inscris",
     link: "/register",
 };

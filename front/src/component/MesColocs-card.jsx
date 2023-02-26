@@ -13,7 +13,7 @@ const Colocs = () => {
           </p>
           <div className="bottom">
             <small className="coloc-date">Crée le 12/01/23</small>
-            <Link to="/test" class="link-coloc"><span><FontAwesomeIcon icon={faArrowRight} /></span></Link>
+            <Link to="/test" className="link-coloc"><span><FontAwesomeIcon icon={faArrowRight} /></span></Link>
           </div>
       </div>
       

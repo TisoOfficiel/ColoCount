@@ -13,8 +13,9 @@
 .container-all-card{
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
-    max-width: 70%;
+    width: 80%;
     gap: 66px;
     margin-top: 80px;
     margin-bottom: 46px;
