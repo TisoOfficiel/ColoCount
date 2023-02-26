@@ -6,7 +6,7 @@ const Register = () => {
         formTitle: "S'incrire",
         register: true,
         button:"Je m'inscris",
-        textLink:"Tu as déjà un compte ?",
+        textLink:"Tu as déjà un compte ? ",
         linkText: "Je me connecte",
         link: "/",
     };

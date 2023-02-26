@@ -1,9 +1,9 @@
 import React from 'react'
-import Colocs from '../component/Colocs'
+import Colocs from '../component/MesColocs-card'
 import Navbar from '../component/Navbar'
 import '../assets/css/pages/MesColocs.css';
 
-const MesColoc = () => {
+const MesColocs = () => {
   return (
     <>
     <Navbar show={false}/>
@@ -21,4 +21,4 @@ const MesColoc = () => {
   )
 }
 
-export default MesColoc
+export default MesColocs

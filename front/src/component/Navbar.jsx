@@ -6,7 +6,7 @@ const Navbar = (props) => {
   const show = props.show
   return (
     <div className='navbar'>
-        <Link to="/"><img src={MySvg} alt="Logo"/></Link>
+        <Link to="/mesColocs"><img src={MySvg} alt="Logo"/></Link>
         <div className="link-container">
           <div className="my-account">Mon Compte</div>
           {show &&(
