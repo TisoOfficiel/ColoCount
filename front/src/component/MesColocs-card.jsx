@@ -3,16 +3,21 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
 
-const Colocs = () => {
+const Colocs = (props) => {
+  const coloc = props.myProp;
+  const dateParts = coloc.created_at.split('-');
+  const year = dateParts[0];
+  const month = dateParts[1];
+  const day = dateParts[2].slice(0, 2);
   return (
     <div>
       <div className="coloc-container">
-          <h2 className="coloc-title">Nom de la Coloc</h2>
+          <h2 className="coloc-title">{coloc.name}</h2>
           <p className="coloc-description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, 
+           {coloc.description} 
           </p>
           <div className="bottom">
-            <small className="coloc-date">Crée le 12/01/23</small>
+            <small className="coloc-date">Crée le {day}/{month}/{year}</small>
             <Link to="/test" className="link-coloc"><span><FontAwesomeIcon icon={faArrowRight} /></span></Link>
           </div>
       </div>

@@ -50,11 +50,13 @@ form{
     display: flex;
     flex-direction: column;
     gap: 40px;
+    align-items: center;
 }
 .register form{
     display: flex;
     flex-wrap: wrap;
     gap: 40px;
+    justify-content:center;
 }
 
 .login input{
@@ -70,6 +72,7 @@ form{
     border-radius: 20px;
     border: 1px solid #E0E0E0;
     font-size: 20px;
+    width: 100%;
 }
 
 .link{

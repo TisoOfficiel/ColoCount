@@ -19,7 +19,7 @@ const Security = (props) => {
             mode: "cors",
             credentials: "include",
             headers: new Headers({
-                "Authorization": "Basic amZnbWFpbC5jb206cGFzc3dvcmQ=",
+                    "Authorization": "Basic amZnbWFpbC5jb206cGFzc3dvcmQ=",
                     "Content-type": "application/x-www-form-urlencoded"
                 }),
                 body: new URLSearchParams({
@@ -58,14 +58,14 @@ const Security = (props) => {
             <p className="title">Bienvenue sur<span>coloCount</span></p>
             <div className={statusClass}>
                 <h1>{Info.formTitle}</h1>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <input type="text" placeholder='username' name="username" value={username} onChange={e => setUsername(e.target.value)}/>
                     {Info.register &&(
                     <input type="email" placeholder='Adresse email' value={email} onChange={e => setEmail(e.target.value)}/> )}
                     <input type="password" placeholder='Mot de passe' name="password" value={password} onChange={e => setPassword(e.target.value)}/>
                     {(Info.register && <input type="password" placeholder='Confirmation mot de passe' value={confirmationPassword} onChange={e => setConfirmationPassword(e.target.value)}/>)}
+                    <button className="btn submit">{Info.button}</button>
                 </form>
-                <button onClick={handleSubmit} className="btn submit">{Info.button}</button>
             </div>
                 <p className="link">{Info.textLink}<Link to={Info.link}>{Info.linkText}</Link></p>
         </div>
