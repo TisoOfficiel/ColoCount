@@ -18,7 +18,7 @@ const Colocs = (props) => {
           </p>
           <div className="bottom">
             <small className="coloc-date">Crée le {day}/{month}/{year}</small>
-            <Link to="/test" className="link-coloc"><span><FontAwesomeIcon icon={faArrowRight} /></span></Link>
+            <Link to={`/mes_colocs/${coloc.id}`} className="link-coloc"><span><FontAwesomeIcon icon={faArrowRight} /></span></Link>
           </div>
       </div>
       
