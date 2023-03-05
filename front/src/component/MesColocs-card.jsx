@@ -1,4 +1,4 @@
-import '../assets/css/components/MesColocs-card.css';
+import '../assets/css/components/mes-colocs-card.css';
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons";

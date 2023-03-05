@@ -2,7 +2,7 @@ import React from 'react'
 import Colocs from '../component/MesColocs-card'
 import Navbar from '../component/Navbar'
 import AddColoc from '../component/modal/AddColoc';
-import '../assets/css/pages/MesColocs.css';
+import '../assets/css/pages/mes-colocs.css';
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 const MesColocs = () => {
