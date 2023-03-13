@@ -1,0 +1,38 @@
+.charge-container{
+    display: flex;
+    text-align: left;
+    align-items: center;
+    justify-content:space-between;
+    width: calc(100% - 60px);
+    margin: 16px 0px;
+    border: 1px solid #E0E0E0;
+    border-radius: 20px;
+    height: 81px;
+    padding: 0 30px;
+    color: #2F0029;
+}
+
+.title-charge{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.paymaster-charge{
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.macoloc-container .left{
+    display: flex;
+    align-items: center;
+}
+
+.amount-charge{
+    font-size: 30px;
+    font-weight: 700;
+    margin-right: 24px;
+}
+
+.macoloc-container .moreVertical {
+    width: 6px;
+}

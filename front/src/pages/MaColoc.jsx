@@ -3,20 +3,19 @@ import React, { useEffect,useState  } from 'react'
 import Navbar from '../component/Navbar'
 import Toggle from '../component/Toggle'
 import Cookies from 'js-cookie'
-import {faEllipsisV } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import Depense from '../component/Depense'
 const MaColoc = () => {
-  const [isChecked, setIsChecked] = useState(false);
-  
+  const [depenseChecked, setDepenseChecked] = useState(false);
+
   function handleToggle() {
-    setIsChecked(!isChecked);
+    setDepenseChecked(!depenseChecked);
   }
 
   const [colocationInfo,setColocationInfo] = useState([]);
   const [userInfo,setUserInfo] = useState([]);
   const [chargeInfo,setChargeInfo] = useState([]);
   const [equilibreInfo,setEquilibreInfo] = useState([]);
+  
 
   useEffect(() => {
     let jwtToken = Cookies.get('token');
@@ -41,21 +40,14 @@ const MaColoc = () => {
     <>
     <Navbar show={true}/>
     <div className="macoloc-container">
-    <Toggle isChecked={isChecked} onToggle={handleToggle} />  
-    <h2>Nom coloc</h2>
-    <button className="btn">Ajouter une dépense</button>
-
-    {chargeInfo.map((charge) => (
-      <div className="charge-container">
-        <h4 className="title-charge" data-chargeId={charge[0].charge_id}>{charge[0].charge_name}</h4>
-        <p className="paymaster-charge" data-paymasterId={charge[1].paymaster_id}>{charge[1].paymaster_name}</p>
-        <div className="left">
-          <p className="amount-charge">{charge[0].charge_amount}</p>
-          <FontAwesomeIcon className="moreVertical" icon={faEllipsisV}/>
-        </div>
-      </div>
-    ))}
-
+    <Toggle depenseChecked={depenseChecked} onToggle={handleToggle} />
+    {!depenseChecked && (
+    <Depense colocationInfo={colocationInfo} chargeInfo={chargeInfo} userInfo={userInfo}/>
+    )} 
+    {depenseChecked && (
+      <>YPI</>
+    )}
+    
     </div>
     </>
   )
