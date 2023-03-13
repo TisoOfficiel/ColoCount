@@ -3,6 +3,7 @@ import Colocs from '../component/MesColocs-card'
 import Navbar from '../component/Navbar'
 import AddColoc from '../component/modal/AddColoc';
 import '../assets/css/pages/mes-colocs.css';
+import '../assets/css/components/modal/common-modal.css'
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 const MesColocs = () => {

@@ -122,6 +122,12 @@ INSERT INTO `charge_user` (`user_id`,`charge_username`,`charge_id`,`colocation_i
 INSERT INTO `charge_user` (`user_id`,`charge_username`,`charge_id`,`colocation_id`,`role_charge`) VALUES
     (2,'Romain',1,1,'participant');
 
+-- INSERT INTO `charge_user` (`user_id`,`charge_username`,`charge_id`,`colocation_id`,`role_charge`) VALUES
+--     (1,'Admin',2,1,'participant');
+
+-- INSERT INTO `charge_user` (`user_id`,`charge_username`,`charge_id`,`colocation_id`,`role_charge`) VALUES
+--     (2,'Romain',2,1,'paymaster_participant');
+
 
 DROP TABLE IF EXISTS `invitation_coloc`;
 CREATE TABLE IF NOT EXISTS `invitation_coloc` (

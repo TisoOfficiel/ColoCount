@@ -13,6 +13,7 @@ const Security = (props) => {
 
     const handleSubmit = async e => {
         e.preventDefault();
+        console.log( username,password);
         if(!Info.register){
             const response = await fetch('http://localhost:1501/login', {
             method: 'POST',
@@ -21,10 +22,10 @@ const Security = (props) => {
             headers: new Headers({
                     "Authorization": "Basic amZnbWFpbC5jb206cGFzc3dvcmQ=",
                     "Content-type": "application/x-www-form-urlencoded"
-                }),
-                body: new URLSearchParams({
-                    username,password
-                }),
+            }),
+            body: new URLSearchParams({
+                username,password
+            }),
             });
 
             const data = await response.json();
