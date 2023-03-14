@@ -19,12 +19,12 @@ const AddColoc = (props) => {
     const listUser = [];
 
 
-    Object.keys(userInfo).map(key => {
+    Object.keys(userInfo).forEach(key => {
         const userObj = {
-            username: userInfo[key].user_username.replace(/"/g, ''),
-            id: userInfo[key].user_id,
-          };
-          listUser.push(userObj);
+          username: userInfo[key].user_username.replace(/"/g, ''),
+          id: userInfo[key].user_id,
+        };
+        listUser.push(userObj);
     });
     
     const handleSelectPaymaster = (selected) => {
@@ -50,9 +50,13 @@ const AddColoc = (props) => {
             body: new URLSearchParams({
                 title, amount, paymaster:JSON.stringify(paymaster), participant:JSON.stringify(participant)
             })
-        }).then(data => {
-            setStatus(data.status);
-        })
+        }).then(response => response.json())
+        .then(data => {
+          setStatus(data.status);
+          if(status === 'success'){
+            window.location.reload();
+          }
+        });
     }
 
     return (

@@ -23,8 +23,6 @@ class ChargeManager extends BaseManager
 
         $charge_id = $this->pdo->lastInsertId();
         
-        // $placeholders = implode(',', array_fill(0, count($participants), '?'));
-
         $sql = "INSERT INTO `charge_user`(`user_id`,`charge_username`,`charge_id`,`colocation_id`,`role_charge`) VALUES (?,?,?,?,?)";
         $query = $this->pdo->prepare($sql);
         foreach ($participants as $key => $participant) {
@@ -52,7 +50,7 @@ class ChargeManager extends BaseManager
         return true;
     }
 
-    public function updateAcount($id,$paymaster,$participants,$amountperPerson){
+    public function updateAccount($id,$paymaster,$participants,$amountperPerson){
        
         $sql = "UPDATE colocation_user SET `amount` = (SELECT `amount` FROM colocation_user WHERE user_id = :user_id AND colocation_id = :colocation_id) + :amount
         WHERE colocation_id = :colocation_id and user_id = :user_id ;";
@@ -75,26 +73,37 @@ class ChargeManager extends BaseManager
         }
 
     }
-    public function updateAcountRemboursement($id,$paymaster,$beneficiary,$amount){
+    public function updateAccountRemboursement($id,$info_User,$amount){
        
+
+        // $sql = "UPDATE colocation_user SET `amount` = :amount WHERE colocation_id = :colocation_id and user_id = :user_id ;";
         $sql = "UPDATE colocation_user SET `amount` = (SELECT `amount` FROM colocation_user WHERE user_id = :user_id AND colocation_id = :colocation_id) + :amount
         WHERE colocation_id = :colocation_id and user_id = :user_id ;";
         
         $query = $this->pdo->prepare($sql);
         $query->bindValue(':amount', $amount,\PDO::PARAM_STR);
-        $query->bindValue(':user_id', $paymaster[1],\PDO::PARAM_STR);
+        $query->bindValue(':user_id', $info_User[1],\PDO::PARAM_STR);
         $query->bindValue(':colocation_id', $id,\PDO::PARAM_STR);
 
         $query->execute();
         
-        $query = $this->pdo->prepare($sql);
+        // $query = $this->pdo->prepare($sql);
         
         
-        $query->bindValue(":amount", -$amount);
-        $query->bindValue(":user_id", $beneficiary[1]);
-        $query->bindValue(":colocation_id", $id);
+        // $query->bindValue(":amount", -$amount);
+        // $query->bindValue(":user_id", $beneficiary[1]);
+        // $query->bindValue(":colocation_id", $id);
         
-        $query->execute();
+        // $query->execute();
+
+        //return amount of beneficiary
+        // $sql = "SELECT `amount` FROM colocation_user WHERE user_id = :user_id AND colocation_id = :colocation_id";
+        // $query = $this->pdo->prepare($sql);
+        // $query->bindValue(":user_id", $beneficiary[1]);
+        // $query->bindValue(":colocation_id", $id);
+        // $query->execute();
+        // $amount = $query->fetch();
+        // return $amount;
 
     }
 }
