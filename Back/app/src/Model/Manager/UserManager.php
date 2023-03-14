@@ -119,6 +119,26 @@ class UserManager extends BaseManager
         return  $response;
     }
 
+
+    public function getColocUserAmountByIds($colocation_id,$user_id):?string
+    {
+
+        $sql = "select `amount` from `colocation_user` where `colocation_id` = :idColoc and `user_id` = :idUser";
+        
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue(':idColoc', $colocation_id,\PDO::PARAM_STR);
+        $query->bindValue(':idUser', $user_id,\PDO::PARAM_STR);
+        $query->execute();
+        
+        $response = $query->fetch();
+
+        if(!$response){
+            return null;
+        }
+
+        return ($response['amount']);
+    }
+
     public function removeUser($id,$user_id,$user_remove_id){
 
         $sql = "SELECT DISTINCT u.*,cu.role,cu.amount FROM users as u INNER JOIN colocation_user as cu ON u.user_id = cu.user_id where (cu.colocation_id = :id AND u.user_id = :user_id) OR (cu.colocation_id =:id AND u.user_id =:user_remove_id) ORDER BY `cu`.`role` ASC";

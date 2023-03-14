@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `colocation_user` (
     `id` integer(11) NOT NULL AUTO_INCREMENT,
     `colocation_id` integer(11) NOT NULL,
     `user_id` integer(11) NOT NULL,
-    `amount` varchar(20) NOT NULL,
+    `amount` DECIMAL(10,2) NOT NULL,
     `role` ENUM ('admin', 'user') DEFAULT 'user',
     PRIMARY KEY (`id`),
     FOREIGN KEY(`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,

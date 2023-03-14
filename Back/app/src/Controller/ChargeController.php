@@ -18,6 +18,7 @@ class ChargeController
         // Verif si la personne connecter est bien dans la bonne url => colocation
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if(!empty($_POST)){
+                
                 if(isset($_POST["paymaster"],$_POST['title'], $_POST["participant"],$_POST['amount']) && !empty($_POST['title'] &&  $_POST["paymaster"] && !empty($_POST["participant"]) && !empty($_POST['amount']))) {                    
                     
                     $name = htmlspecialchars(strip_tags($_POST['title']));
@@ -26,18 +27,18 @@ class ChargeController
                     foreach ($paymaster_array[0] as $key => $value) {
                         $info_paymaster[] = htmlspecialchars(strip_tags($value));
                     }
-
-                    $participant_info = json_decode($_POST["participant"],true);                    
+                   
+                    $participant_info = json_decode($_POST["participant"],true); 
+                 
                     foreach($participant_info as $participant){
                         if($info_paymaster[1] != $participant['id']){
                             $info_participants [] = [htmlspecialchars(strip_tags($participant['username'])),htmlspecialchars(strip_tags($participant['id']))];
                         }
                     }
                    
-                    
-                    $amount = $_POST['amount'];
+                    $amount = round($_POST['amount'],2);  
 
-                    $amountPerPerson = -($amount/(count($info_participants)+1));
+                    $amountPerPerson = -round(($amount/(count($info_participants)+1)),2);
 
                     $type="depense";
                     $category="facture";
@@ -46,13 +47,12 @@ class ChargeController
                     $info_paymaster[] = $amount - abs($amountPerPerson);
                     
                     if($connection->addCharge($id,$info_paymaster,$info_participants,$amount,$name,$type,$category)){
-                        $connection->updateAcount($id,$info_paymaster,$info_participants,$amountPerPerson);
+                        $connection->updateAccount($id,$info_paymaster,$info_participants,$amountPerPerson);
                     }
                 
                     echo json_encode([
-                        'status' => 'sucess',
-                        'message' => 'charge bien crée',
-            
+                        'status' => 'success',
+                        'message' => 'charge bien cree',
                     ]);
                     exit;
                 }
@@ -74,20 +74,44 @@ class ChargeController
                 if(isset($_POST["paymaster"],$_POST["beneficiary"],$_POST['amount']) && !empty($_POST["paymaster"] && !empty($_POST["beneficiary"]) && !empty($_POST['amount']))) {
                     
                     $paymaster_array = json_decode($_POST['paymaster'], true);
+                   
                     $beneficiary_array = json_decode($_POST['beneficiary'],true);
 
                     foreach ($paymaster_array as $key => $value) {
-                        $info_paymaster[] = htmlspecialchars(strip_tags($value));
-                    }                    
-                    foreach ($beneficiary_array as $key => $value) {
-                        $info_beneficiary[] = htmlspecialchars(strip_tags($value));
-                    }                    
-
+                        $info_User[] = htmlspecialchars(strip_tags($value['username']));
+                        $info_User[] = htmlspecialchars(strip_tags($value['id']));
+                    }      
+                    
                     $amount = htmlspecialchars(strip_tags($_POST['amount']));        
                     
+   
                     $connection = new ChargeManager(new PDO());
-                    $connection->updateAcountRemboursement($id,$info_paymaster,$info_beneficiary,$amount);
+                    $connection->updateAccountRemboursement($id,$info_User,$amount);
+
+                    $info_User=[];
+ 
+                    foreach ($beneficiary_array as $key => $value) {
+                        $info_User[] = htmlspecialchars(strip_tags($value['username']));
+                        $info_User[] = htmlspecialchars(strip_tags($value['id']));
+                    }   
                     
+                    $connection = new UserManager(new PDO());
+                    $amountBeneficiary = $connection->getColocUserAmountByIds($id,$info_User[1]);
+
+                    $verificationAmount = $amountBeneficiary - $amount;
+
+                  
+                    if(round($verificationAmount) == 0 && $verificationAmount !=0){
+                        $amount = -$amountBeneficiary;
+                    }
+
+                  
+                    if($verificationAmount == 0){
+                        $amount = -$amount;
+                    }
+
+                    $connection = new ChargeManager(new PDO());
+                    $connection->updateAccountRemboursement($id,$info_User,$amount);
                 }
             }
         }

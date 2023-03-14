@@ -16,6 +16,7 @@ const MaColoc = () => {
   const [chargeInfo,setChargeInfo] = useState([]);
   const [equilibreInfo,setEquilibreInfo] = useState([]);
   
+  console.log(equilibreInfo);
 
   useEffect(() => {
     let jwtToken = Cookies.get('token');
