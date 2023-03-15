@@ -11,6 +11,7 @@
 .my-account,a,a:visited{
     color: #2F0029;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .link-container{

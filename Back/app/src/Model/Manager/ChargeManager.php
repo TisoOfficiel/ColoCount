@@ -73,7 +73,7 @@ class ChargeManager extends BaseManager
         }
 
     }
-    public function updateAccountRemboursement($id,$info_User,$amount){
+    public function updateAccountRemboursement($id,$userId,$amount){
        
 
         // $sql = "UPDATE colocation_user SET `amount` = :amount WHERE colocation_id = :colocation_id and user_id = :user_id ;";
@@ -82,7 +82,7 @@ class ChargeManager extends BaseManager
         
         $query = $this->pdo->prepare($sql);
         $query->bindValue(':amount', $amount,\PDO::PARAM_STR);
-        $query->bindValue(':user_id', $info_User[1],\PDO::PARAM_STR);
+        $query->bindValue(':user_id', $userId,\PDO::PARAM_STR);
         $query->bindValue(':colocation_id', $id,\PDO::PARAM_STR);
 
         $query->execute();
