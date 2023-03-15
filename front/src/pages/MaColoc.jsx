@@ -4,6 +4,7 @@ import Navbar from '../component/Navbar'
 import Toggle from '../component/Toggle'
 import Cookies from 'js-cookie'
 import Depense from '../component/Depense'
+import Equilibre from '../component/Equilibre'
 const MaColoc = () => {
   const [depenseChecked, setDepenseChecked] = useState(false);
 
@@ -15,8 +16,6 @@ const MaColoc = () => {
   const [userInfo,setUserInfo] = useState([]);
   const [chargeInfo,setChargeInfo] = useState([]);
   const [equilibreInfo,setEquilibreInfo] = useState([]);
-  
-  console.log(equilibreInfo);
 
   useEffect(() => {
     let jwtToken = Cookies.get('token');
@@ -46,7 +45,7 @@ const MaColoc = () => {
     <Depense colocationInfo={colocationInfo} chargeInfo={chargeInfo} userInfo={userInfo}/>
     )} 
     {depenseChecked && (
-      <>YPI</>
+      <Equilibre colocationInfo={colocationInfo} userInfo={userInfo} equilibreInfo={equilibreInfo}/>
     )}
     
     </div>

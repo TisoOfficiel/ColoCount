@@ -268,7 +268,7 @@ class ColocationController
                 }
                 
                 
-                
+                $chargeAll = [];
                 for ($i=0; $i < count($chargeArray); $i++) { 
                     $chargeAll [] = [$chargeArray[$i],$paymasterArray[$i],$ParticipantPersCharge[$i]];
                 }

@@ -1,0 +1,110 @@
+.equilibre-container {
+    display: flex;
+    gap: 65px;
+    width: 100%;
+}
+
+.user-amount-container {
+    width: 40%;
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: flex-start; 
+    gap: 29px;
+}
+
+.user-transaction-container {
+    padding: 30px;
+    width: 70%;
+    border: 1px solid #EDEDED;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    height: max-content;
+}
+
+.user-amount-container>div {
+    border: 1px solid #E0E0E0;
+    flex: 0 1 27%;
+    padding: 30px;
+    border-radius: 20px;
+    /* box-shadow: 0 0 0 1px black; */
+    margin-bottom: 10px;
+}
+.user-picture-profile{
+    width: 63px;
+    height: 63px;
+    background: #d4d4d4;
+    border-radius: 90px;
+}
+
+.positive-amount{
+    color: #009D23 ;
+}
+
+.negative-amount{
+    color: #BF0000 ;
+}
+
+.username{
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    margin-top: 14px;
+    color: #2F0029;
+}
+
+.user_amount{
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.macoloc-equilibre-title{
+    margin-top: 55px;
+    margin-bottom: 8px;
+}
+
+.header{
+    margin-bottom: 40px;
+}
+
+
+.repayment-title{
+    color: #2F0029;
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+
+
+.transaction-row{
+    padding: 30px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #E0E0E0;
+}
+.transaction-row:nth-last-child(1){
+    border-bottom: none;
+}
+.transaction-paymaster,.transaction-beneficiary{
+    font-size: 18px;
+    font-weight: 500;
+    color:#2F0029;
+}
+
+.transaction-amount{
+    font-size: 22px;
+    font-weight: 700;
+    color: #2F0029;
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(to left, #FF51EB, #EDE342);
+    border-image-slice: 1;
+}
+
+.transaction-row p {
+    color: black;
+}
