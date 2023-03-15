@@ -472,7 +472,7 @@ class ColocationController
                         $userAll[$user_min_key]['user_amount'] = 0;
                         $userAll[$user_max_key]['user_amount'] = 0;
                         // echo"test";
-                        $Transaction [] = [$user_min['user_username'],round($user_max_amount,2),$user_max['user_username']];
+                        $Transaction [] = [$user_min,round($user_max_amount,2),$user_max];
                         
                     }elseif(abs($user_min_amount) > $user_max_amount){
                         $total = $user_min_amount + $user_max_amount;
@@ -482,7 +482,7 @@ class ColocationController
                         
                         
                         $userAll[$user_max_key]['user_amount'] = 0;
-                        $Transaction [] = [ $user_min['user_username'],round($user_max_amount,2),$user_max['user_username']];
+                        $Transaction [] = [ $user_min,round($user_max_amount,2),$user_max];
                         
                     }elseif(abs($user_min_amount) < $user_max_amount){
                         
@@ -495,8 +495,8 @@ class ColocationController
                         
                         $userAll[$user_min_key]["user_amount"] = 0;
                         $userAll[$user_max_key]['user_amount']= $total;
-
-                        $Transaction []=[$user_min['user_username'],round(abs($user_min_amount), 2),$user_max['user_username']];
+                        
+                        $Transaction []=[$user_min,round(abs($user_min_amount), 2),$user_max];
                     }
 
                    

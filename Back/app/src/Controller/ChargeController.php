@@ -73,30 +73,17 @@ class ChargeController
             if(!empty($_POST)){
                 if(isset($_POST["paymaster"],$_POST["beneficiary"],$_POST['amount']) && !empty($_POST["paymaster"] && !empty($_POST["beneficiary"]) && !empty($_POST['amount']))) {
                     
-                    $paymaster_array = json_decode($_POST['paymaster'], true);
+                    $paymaster_id = htmlspecialchars(strip_tags($_POST['paymaster']));
+                    $beneficiary_id = htmlspecialchars(strip_tags($_POST['beneficiary']));
+                    $amount = htmlspecialchars(strip_tags($_POST['amount']));                
+                    
+
                    
-                    $beneficiary_array = json_decode($_POST['beneficiary'],true);
-
-                    foreach ($paymaster_array as $key => $value) {
-                        $info_User[] = htmlspecialchars(strip_tags($value['username']));
-                        $info_User[] = htmlspecialchars(strip_tags($value['id']));
-                    }      
-                    
-                    $amount = htmlspecialchars(strip_tags($_POST['amount']));        
-                    
-   
                     $connection = new ChargeManager(new PDO());
-                    $connection->updateAccountRemboursement($id,$info_User,$amount);
-
-                    $info_User=[];
- 
-                    foreach ($beneficiary_array as $key => $value) {
-                        $info_User[] = htmlspecialchars(strip_tags($value['username']));
-                        $info_User[] = htmlspecialchars(strip_tags($value['id']));
-                    }   
+                    $connection->updateAccountRemboursement($id,$paymaster_id,$amount);
                     
                     $connection = new UserManager(new PDO());
-                    $amountBeneficiary = $connection->getColocUserAmountByIds($id,$info_User[1]);
+                    $amountBeneficiary = $connection->getColocUserAmountByIds($id,$beneficiary_id);
 
                     $verificationAmount = $amountBeneficiary - $amount;
 
@@ -105,13 +92,18 @@ class ChargeController
                         $amount = -$amountBeneficiary;
                     }
 
-                  
-                    if($verificationAmount == 0){
+                    else{
                         $amount = -$amount;
                     }
 
                     $connection = new ChargeManager(new PDO());
-                    $connection->updateAccountRemboursement($id,$info_User,$amount);
+                    $connection->updateAccountRemboursement($id,$beneficiary_id,$amount);
+
+                    echo json_encode([
+                        'status' => 'success',
+                        'message' => 'Remboursment bien effectuer',
+                    ]);
+                    exit;
                 }
             }
         }

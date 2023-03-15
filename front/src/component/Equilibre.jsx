@@ -1,12 +1,37 @@
 import React from 'react'
+import Cookies from 'js-cookie';
 import '../assets/css/components/equilibre.css'
 const Equilibre = (props) => {
+    const colocId = props.colocationInfo.colocation_id;
     const chargeInfo = props.chargeInfo;
     const colocationInfo = props.colocationInfo;
     const userInfo = props.userInfo;
     const equilibreInfo = props.equilibreInfo;
-    console.log(userInfo);
-    console.log(props);
+    const connectedId = props.connectedId;
+
+    async function sendRepayment(paymasterId,beneficiaryId,amount){
+        let jwtToken = Cookies.get('token');
+
+        await fetch(`http://localhost:1501/mes_colocs/${colocId}/add_remboursement`, {
+            method: 'POST',
+            mode:"cors",
+            credentials:"include",
+            headers: new Headers({
+                "Authorization": "Bearer " + jwtToken,
+                "content-type": "application/x-www-form-urlencoded",
+            }),
+            body: new URLSearchParams({
+                paymaster:JSON.stringify(paymasterId),
+                beneficiary:JSON.stringify(beneficiaryId),
+                amount:JSON.stringify(amount),
+            })
+        }).then(response => response.json())
+        .then(data => {
+            if(data.status === 'success'){
+                window.location.reload();
+            }
+        });
+    }
     return (
         <div className='macoloc-content'>
             <div className="header">
@@ -33,21 +58,26 @@ const Equilibre = (props) => {
                 <div className="user-transaction-container">
                     <h4 className='repayment-title'>Qui rembourser ?</h4>
                     <div className="transaction-container">
-                        {equilibreInfo.map(transaction_info => (
-                            <div className="transaction-row">
+                        {equilibreInfo.map((transaction_info, index) => (
+                            <div className="transaction-row" key={index}>
                                 <div className="transaction-paymaster">
-                                    {transaction_info[0]}
+                                    {transaction_info[0]['user_username']}  
                                 </div>
                                 <p>doit à</p>
                                 <div className="transaction-beneficiary">
-                                    {transaction_info[2]}
+                                    {transaction_info[2]['user_username']}
                                 </div>
                                 <div className="transaction-amount">
                                     {transaction_info[1]}€
                                 </div>
+                                {connectedId === transaction_info[0]['user_id'] && (
+                                    <button className='btn' onClick={() => sendRepayment(connectedId, transaction_info[2].user_id, transaction_info[1])}>Rembourser</button>
+                                )}
                             </div>
                         ))}
                     </div>
+
+                    {}
                 </div>
             </div>
         </div>

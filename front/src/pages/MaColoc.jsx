@@ -1,10 +1,11 @@
-import '../assets/css/pages/ma-coloc.css'
-import React, { useEffect,useState  } from 'react'
-import Navbar from '../component/Navbar'
-import Toggle from '../component/Toggle'
-import Cookies from 'js-cookie'
-import Depense from '../component/Depense'
-import Equilibre from '../component/Equilibre'
+import '../assets/css/pages/ma-coloc.css';
+import React, { useEffect,useState  } from 'react';
+import Navbar from '../component/Navbar';
+import Toggle from '../component/Toggle';
+import Cookies from 'js-cookie';
+import Depense from '../component/Depense';
+import Equilibre from '../component/Equilibre';
+import jwt_decode from 'jwt-decode';
 const MaColoc = () => {
   const [depenseChecked, setDepenseChecked] = useState(false);
 
@@ -16,9 +17,12 @@ const MaColoc = () => {
   const [userInfo,setUserInfo] = useState([]);
   const [chargeInfo,setChargeInfo] = useState([]);
   const [equilibreInfo,setEquilibreInfo] = useState([]);
-
+  const [connectedId,setConnectedId] = useState('');
   useEffect(() => {
     let jwtToken = Cookies.get('token');
+    const decodedToken = jwt_decode(jwtToken);
+    setConnectedId(decodedToken.id);
+
     let id = window.location.pathname.split('/')[2];
 
     fetch(`http://localhost:1501/mes_colocs/${id}`, {
@@ -45,7 +49,7 @@ const MaColoc = () => {
     <Depense colocationInfo={colocationInfo} chargeInfo={chargeInfo} userInfo={userInfo}/>
     )} 
     {depenseChecked && (
-      <Equilibre colocationInfo={colocationInfo} userInfo={userInfo} equilibreInfo={equilibreInfo}/>
+      <Equilibre colocationInfo={colocationInfo} userInfo={userInfo} equilibreInfo={equilibreInfo} connectedId={connectedId}/>
     )}
     
     </div>
