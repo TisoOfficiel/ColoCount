@@ -85,7 +85,6 @@ const AddColoc = (props) => {
                                 emptyRecordMsg="Pas de payeur"
                                 singleSelect={true}
                                 options={listUser}
-                                // { border: "none", "border-bottom": "1px solid blue", "border-radius": "0px" } }
                                 onSelect={handleSelectPaymaster}
                             />
                         </label>
