@@ -25,6 +25,7 @@
 .macoloc-container .left{
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .amount-charge{
@@ -35,4 +36,45 @@
 
 .macoloc-container .moreVertical {
     width: 6px;
+}
+
+
+.option-container{
+    width: max-content;
+    position: absolute;
+    display: none;
+    gap: 24px;
+    flex-direction: column;
+    right: -15px;
+    top: -60px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 16px ;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.image-container:hover .option-container{
+    display: flex;
+}
+.option-container button{
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+   
+}
+
+.more-content{
+    color: #2F0029;
+}
+
+.delete{
+    font-weight: 600;
+    color: #BF0000
+}
+.more-content:hover{
+    color: rgb(54, 0, 47);
+}
+.delete:hover{
+    color: #960000
 }

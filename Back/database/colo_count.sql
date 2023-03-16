@@ -82,7 +82,6 @@ CREATE TABLE IF NOT EXISTS `charge` (
     `name`          varchar(20) NOT NULL,
     `charge_amount`        float NOT NULL,
     `type`          ENUM ('depense', 'remboursement') DEFAULT 'depense',
-    `category`      varchar(20) NOT NULL,
     `created_at`    datetime,
     `updated_at`    datetime,
     PRIMARY KEY(`charge_id`)

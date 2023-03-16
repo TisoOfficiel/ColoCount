@@ -3,21 +3,22 @@
 namespace App\Model\Manager;
 
 use App\Base\BaseManager;
+use App\Model\Entity\Charge;
+use App\Model\Entity\Charge_user;
 
 class ChargeManager extends BaseManager
 {
 
-    public function addCharge($id,$paymaster,$participants,$amount,$name,$type,$category){
+    public function addCharge($id,$paymaster,$participants,$amount,$name,$type){
     
 
-        $sql = "INSERT INTO `charge` (`name`,`charge_amount`,`type`,`category`) VALUES (:name,:charge_amount,:type,:category)";
+        $sql = "INSERT INTO `charge` (`name`,`charge_amount`,`type`) VALUES (:name,:charge_amount,:type)";
 
         $query = $this->pdo->prepare($sql);
 
         $query->bindValue(':name',$name, \PDO::PARAM_STR);
         $query->bindValue(':charge_amount',$amount, \PDO::PARAM_STR);
         $query->bindValue(':type',$type, \PDO::PARAM_STR);
-        $query->bindValue(':category',$category, \PDO::PARAM_STR);
 
         $query->execute();
 
@@ -104,6 +105,27 @@ class ChargeManager extends BaseManager
         // $query->execute();
         // $amount = $query->fetch();
         // return $amount;
+
+    }
+
+    public function getChargeInfo($id,$charge_id){
+        $sql = "SELECT DISTINCT c.name, c.charge_amount, cu.charge_username, cu.role_charge
+        FROM charge as c
+        INNER JOIN charge_user as cu
+        ON c.charge_id = cu.charge_id AND cu.charge_id =:charge_id and cu.colocation_id = :id";
+
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue(':charge_id',$charge_id,\PDO::PARAM_STR);
+        $query->bindValue(':id', $id,\PDO::PARAM_STR);
+
+        $query->execute();
+        $infoCharge = [];
+        while ($data = $query->fetch(\PDO::FETCH_ASSOC)) {
+            $infoCharge[] = [new Charge($data),new Charge_user($data)];
+        }
+
+
+         return $infoCharge;
 
     }
 }

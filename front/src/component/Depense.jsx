@@ -33,7 +33,7 @@ const Depense = (props) => {
           </div>
           {chargeInfo.map((charge, index) => (
             // Render each charge item here
-            <DepenseRow charge={charge} key={index} datakey={index}/>
+            <DepenseRow charge={charge} key={index} datakey={index} colocationInfo={colocationInfo}/>
           ))}
         </div>
         

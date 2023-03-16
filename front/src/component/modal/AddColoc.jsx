@@ -35,7 +35,7 @@ const AddColoc = (props) => {
   return (
     <div className="modal-background">
       <div className="modal-container">
-        <FontAwesomeIcon className="close-icon" icon={faXmark}onClick={props.onClose}></FontAwesomeIcon>
+        <FontAwesomeIcon className="close-icon" icon={faXmark} onClick={props.onClose}></FontAwesomeIcon>
         <h2 className="title">Ajouter une <br/> nouvelle coloc</h2>
         <form onSubmit={handleSubmit} className='form-add-coloc'>
           <input type="text" name="titre" placeholder='Titre' value={titre} onChange={e => setTitre(e.target.value)} />
