@@ -41,12 +41,11 @@ class ChargeController
                     $amountPerPerson = -round(($amount/(count($info_participants)+1)),2);
 
                     $type="depense";
-                    $category="facture";
 
                     $connection = new ChargeManager(new PDO());
                     $info_paymaster[] = $amount - abs($amountPerPerson);
                     
-                    if($connection->addCharge($id,$info_paymaster,$info_participants,$amount,$name,$type,$category)){
+                    if($connection->addCharge($id,$info_paymaster,$info_participants,$amount,$name,$type)){
                         $connection->updateAccount($id,$info_paymaster,$info_participants,$amountPerPerson);
                     }
                 
@@ -108,4 +107,56 @@ class ChargeController
             }
         }
     }
+
+    #[Route('/mes_colocs/{id}/get_charge_info/{charge_id}',name:"mesColocs.getChargeInfo",methods:['GET'])]
+    public function getChargeInfo($id,$charge_id){
+        $connection = new ChargeManager(new PDO());
+        if($chargeInfo = $connection->getChargeInfo($id,$charge_id)){
+            $amount = 0;
+            $title = "";
+            
+            for ($i = 0; $i < count($chargeInfo); $i++) {
+    
+                if($chargeInfo[$i][0]->getName() != $title){
+                    $title = $chargeInfo[$i][0]->getName();
+                }
+    
+                if($chargeInfo[$i][0]->getCharge_amount() != $amount){
+                    $amount = round($chargeInfo[$i][0]->getCharge_amount(),2);
+                }
+    
+                if($chargeInfo[$i][1]->getRole_Charge() == "paymaster" || $chargeInfo[$i][1]->getRole_Charge() == "paymaster_participant"){
+                    $paymaster = $chargeInfo[$i][1]->getCharge_Username();
+                }
+                if($chargeInfo[$i][1]->getRole_Charge() == "participant"){
+                    $participant[] = $chargeInfo[$i][1]->getCharge_Username();
+                }
+            }
+    
+            $participant[] = $paymaster;
+            $amountPerPerson = round($amount / count($participant),2);
+    
+            $infoSingleCharge= [
+                'title' => $title,
+                'paymaster' => $paymaster,
+                'participant' => $participant,
+                'amount' => $amount,
+                'amountPerPersonne' => $amountPerPerson,
+            ];
+    
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Charge bien prise en compte',
+                'infoSingleCharge' => $infoSingleCharge
+            ]);
+            exit;
+        }else{
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Pas possible d\'accéder a cette charge'
+            ]);
+            exit;
+        }
+    }
 }
+    

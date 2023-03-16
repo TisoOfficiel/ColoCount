@@ -1,0 +1,75 @@
+
+.modal-SingleInfo{
+    width: 50%;
+}
+
+.content-infoSinglePage{
+    display: flex;
+    gap:0 60px ;
+}
+
+.modal-SingleInfo .title{
+    margin-bottom: 52px;
+}
+.left-infoSinglePage{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #EDEDED;
+    border-radius: 20px;
+    padding:30px;
+    align-items: center;
+}
+
+.depense{
+    color: rgba(47, 0, 41, 1);
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.right-infoSinglePage{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 30px;
+    gap: 30px;
+    border: 1px solid #EDEDED;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+}
+
+.content-infoSinglePage{
+    color: rgba(126, 126, 126, 1);
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.body-infoSinglePage
+{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: flex-start; 
+    gap: 29px;
+}
+
+.participant-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #E0E0E0;
+    flex: 0 1 30%;
+    padding:22px 30px;
+    border-radius: 15px;
+    /* box-shadow: 0 0 0 1px black; */
+    margin-bottom: 20px;
+    color: rgba(47, 0, 41, 1);;
+}
+
+.amount-per-personne-content{
+    font-size: 20px;
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(to left, #FF51EB, #EDE342);
+    border-image-slice: 1;
+}
