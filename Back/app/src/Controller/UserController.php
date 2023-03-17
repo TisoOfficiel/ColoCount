@@ -41,7 +41,7 @@ class UserController
 
         echo json_encode([
             'status' => 'error',
-            'message' => 'Pas de connexion'
+            'message' => 'Pas de connexion',
         ]);
 
         exit;

@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `colocation_user` (
     `id` integer(11) NOT NULL AUTO_INCREMENT,
     `colocation_id` integer(11) NOT NULL,
     `user_id` integer(11) NOT NULL,
-    `amount` varchar(20) NOT NULL,
+    `amount` DECIMAL(10,2) NOT NULL,
     `role` ENUM ('admin', 'user') DEFAULT 'user',
     PRIMARY KEY (`id`),
     FOREIGN KEY(`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
@@ -82,14 +82,13 @@ CREATE TABLE IF NOT EXISTS `charge` (
     `name`          varchar(20) NOT NULL,
     `charge_amount`        float NOT NULL,
     `type`          ENUM ('depense', 'remboursement') DEFAULT 'depense',
-    `category`      varchar(20) NOT NULL,
     `created_at`    datetime,
     `updated_at`    datetime,
     PRIMARY KEY(`charge_id`)
 );
 
-INSERT INTO `charge` (`charge_id`,`name`,`charge_amount`,`type`,`category`,`created_at`,`updated_at`) VALUES
-    (1,"Courses",100,'depense','course','2023-01-13 10:12:24','2023-01-13 10:12:24');
+INSERT INTO `charge` (`charge_id`,`name`,`charge_amount`,`type`,`created_at`,`updated_at`) VALUES
+    (1,"Courses",100,'depense','2023-01-13 10:12:24','2023-01-13 10:12:24');
 
 -- INSERT INTO `charge` (`charge_id`,`name`,`charge_amount`,`type`,`category`,`created_at`,`updated_at`) VALUES
 --     (2,"Loyer",100,'depense','loyer','2023-01-14 10:12:24','2023-01-14 10:12:24');
@@ -121,6 +120,12 @@ INSERT INTO `charge_user` (`user_id`,`charge_username`,`charge_id`,`colocation_i
 
 INSERT INTO `charge_user` (`user_id`,`charge_username`,`charge_id`,`colocation_id`,`role_charge`) VALUES
     (2,'Romain',1,1,'participant');
+
+-- INSERT INTO `charge_user` (`user_id`,`charge_username`,`charge_id`,`colocation_id`,`role_charge`) VALUES
+--     (1,'Admin',2,1,'participant');
+
+-- INSERT INTO `charge_user` (`user_id`,`charge_username`,`charge_id`,`colocation_id`,`role_charge`) VALUES
+--     (2,'Romain',2,1,'paymaster_participant');
 
 
 DROP TABLE IF EXISTS `invitation_coloc`;

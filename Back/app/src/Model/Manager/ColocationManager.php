@@ -130,7 +130,7 @@ class ColocationManager extends BaseManager
         //     }
         // }
         // die;
-        $sql = "SELECT c.colocation_id,c.colocation_name,c.description,u.username,u.user_id ,u.username ,ch.charge_id ,ch.name,ch.charge_amount,ch.type,ch.category ,chu.charge_username,chu.role_charge,cu.amount,cu.role FROM colocation AS c LEFT JOIN colocation_user AS cu ON c.colocation_id = cu.colocation_id LEFT JOIN users AS u ON cu.user_id = u.user_id LEFT JOIN charge_user AS chu ON u.user_id = chu.user_id LEFT JOIN charge AS ch ON ch.charge_id = chu.charge_id where cu.colocation_id=:colocation_user_colocation_id and c.colocation_id =:colacation_id";
+        $sql = "SELECT c.colocation_id,c.colocation_name,c.description,u.username,u.user_id ,u.username ,ch.charge_id ,ch.name,ch.charge_amount,ch.type ,chu.charge_username,chu.role_charge,cu.amount,cu.role FROM colocation AS c LEFT JOIN colocation_user AS cu ON c.colocation_id = cu.colocation_id LEFT JOIN users AS u ON cu.user_id = u.user_id LEFT JOIN charge_user AS chu ON u.user_id = chu.user_id LEFT JOIN charge AS ch ON ch.charge_id = chu.charge_id where cu.colocation_id=:colocation_user_colocation_id and c.colocation_id =:colacation_id";
 
         $query = $this->pdo->prepare($sql);
         $query->bindValue(':colocation_user_colocation_id', $id,\PDO::PARAM_STR);

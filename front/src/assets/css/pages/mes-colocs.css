@@ -1,0 +1,24 @@
+.container{
+    margin-top: 104px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.no-scroll {
+    overflow: hidden;
+  }
+.container h1{
+    font-size: 55px;
+    color: #2F0029;
+}
+.container-all-card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 80%;
+    gap: 66px;
+    margin-top: 80px;
+    margin-bottom: 46px;
+}

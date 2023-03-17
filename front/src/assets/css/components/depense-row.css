@@ -1,0 +1,80 @@
+.charge-container{
+    display: flex;
+    text-align: left;
+    align-items: center;
+    justify-content:space-between;
+    width: calc(100% - 60px);
+    margin: 16px 0px;
+    border: 1px solid #E0E0E0;
+    border-radius: 20px;
+    height: 81px;
+    padding: 0 30px;
+    color: #2F0029;
+}
+
+.title-charge{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.paymaster-charge{
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.macoloc-container .left{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.amount-charge{
+    font-size: 30px;
+    font-weight: 700;
+    margin-right: 24px;
+}
+
+.macoloc-container .moreVertical {
+    width: 6px;
+}
+
+
+.option-container{
+    width: max-content;
+    position: absolute;
+    display: none;
+    gap: 24px;
+    flex-direction: column;
+    right: -10px;
+    top: -30px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 16px ;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.image-container:hover .option-container{
+    display: flex;
+}
+.option-container button{
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+   
+}
+
+.more-content{
+    color: #2F0029;
+}
+
+.delete{
+    font-weight: 600;
+    color: #BF0000
+}
+.more-content:hover{
+    color: rgb(54, 0, 47);
+}
+.delete:hover{
+    color: #960000
+}
