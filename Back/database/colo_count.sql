@@ -87,8 +87,8 @@ CREATE TABLE IF NOT EXISTS `charge` (
     PRIMARY KEY(`charge_id`)
 );
 
-INSERT INTO `charge` (`charge_id`,`name`,`charge_amount`,`type`,`category`,`created_at`,`updated_at`) VALUES
-    (1,"Courses",100,'depense','course','2023-01-13 10:12:24','2023-01-13 10:12:24');
+INSERT INTO `charge` (`charge_id`,`name`,`charge_amount`,`type`,`created_at`,`updated_at`) VALUES
+    (1,"Courses",100,'depense','2023-01-13 10:12:24','2023-01-13 10:12:24');
 
 -- INSERT INTO `charge` (`charge_id`,`name`,`charge_amount`,`type`,`category`,`created_at`,`updated_at`) VALUES
 --     (2,"Loyer",100,'depense','loyer','2023-01-14 10:12:24','2023-01-14 10:12:24');

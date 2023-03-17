@@ -23,13 +23,10 @@ const AddColoc = (props) => {
   })
     .then(response => response.json())
     .then(data => {
-      setStatus(data.status);
-    });
-
-    if(status === 'success'){
-      props.onClose();
       window.location.reload();
-    }
+    })
+
+
     
   }
   return (

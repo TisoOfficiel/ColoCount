@@ -23,7 +23,6 @@ const Depense = (props) => {
     return (
         <div className='macoloc-content'>
 
-          {/* <Dropdown/> */}
           {isModalOpen &&(
             <AddDepense onClose={handleCloseModal} userInfo={userInfo} colocationInfo={colocationInfo}/>
           )}
@@ -32,7 +31,6 @@ const Depense = (props) => {
             <button className="btn" onClick={handleOpenModal}>Ajouter une dépense</button>
           </div>
           {chargeInfo.map((charge, index) => (
-            // Render each charge item here
             <DepenseRow charge={charge} key={index} datakey={index} colocationInfo={colocationInfo}/>
           ))}
         </div>
