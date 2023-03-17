@@ -36,20 +36,16 @@ const DepenseRow = (props) => {
           }
       });
   }
-  // console.log(infoSingleCharge);
-  // function deleteCharge(){
-
-  // }
   
   return (
 
     
 
-    <div className="charge-container" key={props.datakey}>
+    <div className="charge-container" key={props.datakey} data-chargeid={chargeInfo.charge_id}>
       {openSingleChargeModal &&(
         <SingleInfoCharge infoSingleCharge={infoSingleCharge} onClose={handleCloseModalSingleCharge}/>
       )}
-      <h4 className="title-charge" data-chargeid={chargeInfo.charge_id}>{chargeInfo.charge_name}</h4>
+      <h4 className="title-charge">{chargeInfo.charge_name}</h4>
       <p className="paymaster-charge" data-paymasterid={paymasterInfo.paymaster_id}>Payé par {paymasterInfo.paymaster_name}</p>
       <div className="left">
           <p className="amount-charge">{chargeInfo.charge_amount}€</p>
@@ -57,7 +53,6 @@ const DepenseRow = (props) => {
             <img src={MoreVertical} alt="more vertical" className='moreVertical' />
             <div className="option-container">            
               <button className='more-content' onClick={() => openSeeMore(chargeInfo.charge_id)}>Voir plus</button>
-              <button className='delete'>Delete</button>
             </div>
           </div>
       </div>

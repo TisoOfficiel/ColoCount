@@ -10,7 +10,6 @@ final class Charge extends BaseEntity
     private string $name;
     private float $charge_amount;
     private string $type;
-    private ?string $category;
     private string $created_at;
     private string $updated_at;
     private string $deleted_at;
@@ -84,24 +83,6 @@ final class Charge extends BaseEntity
     public function setType(string $type): Charge
     {
         $this->type = $type;
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getCategory(): ?string
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param string|null $category
-     * @return Charge
-     */
-    public function setCategory(?string $category): Charge
-    {
-        $this->category = $category;
         return $this;
     }
 

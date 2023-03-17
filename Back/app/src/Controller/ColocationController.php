@@ -204,8 +204,7 @@ class ColocationController
                         $charge_name = $infoColoc[$j][3]->getName();
                         $charge_amount = $infoColoc[$j][3]->getCharge_Amount();
                         $charge_type = $infoColoc[$j][3]->getType();
-                        $charge_category = $infoColoc[$j][3]->getCategory();
-                        $chargeArray[]=[ "charge_id"=>$charge_id, "charge_name"=>$charge_name,"charge_amount"=>$charge_amount,"charge_type"=>$charge_type,"charge_cartegory"=>$charge_category];
+                        $chargeArray[]=[ "charge_id"=>$charge_id, "charge_name"=>$charge_name,"charge_amount"=>$charge_amount,"charge_type"=>$charge_type];
                     
                 }
                 

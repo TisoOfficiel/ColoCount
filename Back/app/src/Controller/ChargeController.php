@@ -20,7 +20,7 @@ class ChargeController
             if(!empty($_POST)){
                 
                 if(isset($_POST["paymaster"],$_POST['title'], $_POST["participant"],$_POST['amount']) && !empty($_POST['title'] &&  $_POST["paymaster"] && !empty($_POST["participant"]) && !empty($_POST['amount']))) {                    
-                    
+
                     $name = htmlspecialchars(strip_tags($_POST['title']));
                     $paymaster_array = json_decode($_POST['paymaster'], true);
                     
@@ -75,8 +75,6 @@ class ChargeController
                     $paymaster_id = htmlspecialchars(strip_tags($_POST['paymaster']));
                     $beneficiary_id = htmlspecialchars(strip_tags($_POST['beneficiary']));
                     $amount = htmlspecialchars(strip_tags($_POST['amount']));                
-                    
-
                    
                     $connection = new ChargeManager(new PDO());
                     $connection->updateAccountRemboursement($id,$paymaster_id,$amount);
@@ -158,5 +156,6 @@ class ChargeController
             exit;
         }
     }
+
 }
     
